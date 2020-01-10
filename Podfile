@@ -12,6 +12,7 @@ target 'MyFirstApplication' do
   pod 'Firebase/Storage'
   
   pod 'ProgressHUD'
+  pod 'JSQMessagesViewController'
   # Pods for MyFirstApplication
 
 end

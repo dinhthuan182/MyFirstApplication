@@ -12,15 +12,42 @@ class MessageCollectionViewCell: UICollectionViewCell {
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.layer.cornerRadius = 34
+        imageView.layer.cornerRadius = 35
         imageView.layer.masksToBounds = true
-        
         return imageView
     }()
-    let contentStackView = UIStackView()
-    let senderLabel = UILabel()
-    let messageLabel = UILabel()
     
+    let containerView = UIView()
+    let senderLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Mark Zuckerberg"
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        return label
+    }()
+    
+    let timeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "15:00 PM"
+        label.textColor = UIColor.customRGB(51, 51, 70, 0.8)
+        label.font = UIFont.systemFont(ofSize: 16)
+        return label
+    }()
+
+    let messageLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Hello, I am CEO of Facebook. Nice to meet you."
+        label.textColor = UIColor.customRGB(51, 51, 70, 0.8)
+        label.font = UIFont.systemFont(ofSize: 16)
+        return label
+    }()
+    
+    let hasReadImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 8
+        imageView.layer.masksToBounds = true
+        return imageView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,25 +59,76 @@ class MessageCollectionViewCell: UICollectionViewCell {
     func setupUI() {
         backgroundColor = .cyan
         self.setupImageView()
-        self.setupContentView()
+        self.setupContainerView()
     }
 }
 
+//set up UI for cell
 extension MessageCollectionViewCell {
-    
+    //auto layout for avatar of sender
     private func setupImageView() {
         self.addSubview(profileImageView)
         profileImageView.image = UIImage(named: "mark-zuckerberg")
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        profileImageView.frame.size = CGSize(width: 68, height: 68)
+        
         NSLayoutConstraint.activate([
             profileImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            profileImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            profileImageView.widthAnchor.constraint(equalToConstant: 70),
+            profileImageView.heightAnchor.constraint(equalToConstant: 70)
         ])
         
+        addConstraint(NSLayoutConstraint(item: profileImageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
     }
     
-    private func setupContentView() {
+    //auto layout for text area
+    private func setupContainerView() {
+        self.addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            containerView.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 5),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            containerView.heightAnchor.constraint(equalToConstant: 70)
+        ])
+        addConstraint(NSLayoutConstraint(item: containerView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+        
+        //auto layout for name of sender
+        containerView.addSubview(senderLabel)
+        senderLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            senderLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            senderLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            senderLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 7.0 / 9.0)
+        ])
+        
+        containerView.addSubview(timeLabel)
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            timeLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 10),
+            timeLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            timeLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 2.0 / 9.0)
+        ])
+        
+        //auto layout for message content
+        containerView.addSubview(messageLabel)
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            messageLabel.topAnchor.constraint(equalTo: senderLabel.bottomAnchor, constant: 4),
+            messageLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            messageLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 8.0 / 9.0)
+        ])
+        
+        //auto layout for image check status of message
+        containerView.addSubview(hasReadImageView)
+        hasReadImageView.image = UIImage(named: "mark-zuckerberg")
+        hasReadImageView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            hasReadImageView.topAnchor.constraint(equalTo: timeLabel.bottomAnchor, constant: 5),
+            hasReadImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            hasReadImageView.widthAnchor.constraint(equalToConstant: 16),
+            hasReadImageView.heightAnchor.constraint(equalToConstant: 16)
+        ])
     }
 }

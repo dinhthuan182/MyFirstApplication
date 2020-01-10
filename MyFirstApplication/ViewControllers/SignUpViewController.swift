@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 import ProgressHUD
 
 class SignUpViewController: UIViewController {
@@ -41,8 +42,10 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if Auth.auth().currentUser != nil {
+            self.performSegue(withIdentifier: "signUpVCToMainTabBarVC", sender: nil)
+        }
         self.setupUI()
-        // Do any additional setup after loading the view.
     }
     
     func setupUI() {
@@ -61,7 +64,7 @@ class SignUpViewController: UIViewController {
         self.validateInput()
         self.signUpAccount(onSuccess: {
             //switch view
-            self.performSegue(withIdentifier: "signupVCToMainTabBarVC", sender: nil)
+            self.performSegue(withIdentifier: "signUpVCToMainTabBarVC", sender: nil)
         }, onError: { (errorMessage) in
             ProgressHUD.showError(errorMessage)
         })

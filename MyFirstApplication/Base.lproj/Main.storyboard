@@ -214,7 +214,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2558" y="159"/>
+            <point key="canvasLocation" x="-3784" y="-501"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="1H4-dz-nBO">
@@ -417,12 +417,12 @@
                         <outlet property="signUpButton" destination="sos-Wt-EwU" id="rQf-ki-oKc"/>
                         <outlet property="signUpStackView" destination="UfR-do-tbV" id="Ix4-wg-hJN"/>
                         <outlet property="signUpTitleLabel" destination="UfR-4w-XOs" id="odO-pk-WNY"/>
-                        <segue destination="boN-Dy-7PG" kind="presentation" identifier="signupVCToMainTabBarVC" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="mf0-eV-wic"/>
+                        <segue destination="boN-Dy-7PG" kind="presentation" identifier="signUpVCToMainTabBarVC" modalPresentationStyle="fullScreen" modalTransitionStyle="flipHorizontal" id="mf0-eV-wic"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YaP-nH-AFa" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2558" y="828"/>
+            <point key="canvasLocation" x="-3784" y="1074"/>
         </scene>
         <!--Home-->
         <scene sceneID="aO7-R8-tTc">
@@ -438,7 +438,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ffg-Om-fSJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4516" y="286"/>
+            <point key="canvasLocation" x="-1784" y="301"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="5nn-er-l27">
@@ -467,7 +467,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tqp-gv-wsN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4516" y="1045"/>
+            <point key="canvasLocation" x="-793" y="1074"/>
         </scene>
         <!--Main Tab Bar View Controller-->
         <scene sceneID="u6U-dM-ya0">
@@ -488,7 +488,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNY-qh-lOV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3606" y="286"/>
+            <point key="canvasLocation" x="-2707" y="301"/>
         </scene>
         <!--Message-->
         <scene sceneID="Ifa-ed-Bq9">
@@ -507,7 +507,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Puh-qE-G9i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3605.7971014492755" y="-501.5625"/>
+            <point key="canvasLocation" x="-1783" y="-500"/>
         </scene>
         <!--Message Collection View Controller-->
         <scene sceneID="af2-bC-fDW">
@@ -542,7 +542,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5I2-wJ-DNC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4441" y="-502"/>
+            <point key="canvasLocation" x="-794" y="-501"/>
         </scene>
         <!--Profile-->
         <scene sceneID="You-vS-umT">
@@ -561,7 +561,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AkZ-gv-eOp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3606" y="1045"/>
+            <point key="canvasLocation" x="-1784" y="1075"/>
         </scene>
     </scenes>
     <resources>
@@ -578,6 +578,6 @@
         <image name="user_white" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dr0-hr-AlU"/>
+        <segue reference="mf0-eV-wic"/>
     </inferredMetricsTieBreakers>
 </document>
