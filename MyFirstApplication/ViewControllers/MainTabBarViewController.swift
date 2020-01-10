@@ -18,7 +18,16 @@ class MainTabBarViewController: UITabBarController {
             let signInVC = storyboard.instantiateViewController(withIdentifier: "SignInViewController")
             self.present(signInVC, animated: true, completion: nil)
         }
-        // Do any additional setup after loading the view.
+
+//        let date = Date()
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//        let time = formatter.string(from: date)
+//        Api.chats.sendMessage(message: "Good mornig", receiver: "E24O3sYszVd6A1JZdm8oIJ1ed1R2", time: time, status: 0, onSucess: {
+//            print("Send message success")
+//        }, onError: { (errorMessage) in
+//            print(errorMessage)
+//        })
     }
     
 

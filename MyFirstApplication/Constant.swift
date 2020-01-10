@@ -9,6 +9,7 @@
 import Foundation
 
 let REF_USER = "users"
+let REF_CHAT = "chats"
 //storage data reference constant
 let URL_STORAGE_ROOT = "gs://chatapp-8f79c.appspot.com"
 let PROFILE_STORAGE = "profiles"
@@ -19,6 +20,15 @@ let EMAIL = "email"
 let FULLNAME = "fullname"
 let PROFILE_IMAGE_URL = "profileImageUrl"
 let STATUS = "status"
+
+//Chat data
+let SENDER_UID = "senderUid"
+let MESSAGE = "message"
+let RECEIVER_UID = "reveiverUid"
+let TIME = "time"
+
+
+
 
 //Error message
 let ERROR_EMPTY_PHOTO = "Please choose your profile image"

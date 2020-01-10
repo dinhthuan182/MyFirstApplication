@@ -14,12 +14,22 @@ class ReferenDatabase {
     //Database Reference
     let databaseRoot: DatabaseReference = Database.database().reference()
     
+    //User Table
     var databaseUsers: DatabaseReference {
         return databaseRoot.child(REF_USER)
     }
     
     func databaseSpecificUser(uid: String) -> DatabaseReference {
         return databaseUsers.child(uid)
+    }
+    
+    //Chat table
+    var databaseChats: DatabaseReference {
+        return databaseRoot.child(REF_CHAT)
+    }
+    
+    func databaseSpecificChat(uid: String) -> DatabaseReference {
+        return databaseChats.child(uid)
     }
     
     //Storage Reference

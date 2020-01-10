@@ -10,4 +10,5 @@ import Foundation
 
 class Api {
     static var users = UserApi()
+    static var chats = ChatApi()
 }
