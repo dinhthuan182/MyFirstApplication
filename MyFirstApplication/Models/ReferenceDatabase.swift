@@ -28,8 +28,15 @@ class ReferenDatabase {
         return databaseRoot.child(REF_CHAT)
     }
     
+    //create a node
     func databaseSpecificChat(uid: String) -> DatabaseReference {
         return databaseChats.child(uid)
+    }
+    
+    //load message of current user
+    func loadAllMessage(currentUid: String) -> DatabaseQuery {
+        //return databaseChats.queryStarting(atValue: currentUid)
+        return databaseChats.queryEnding(atValue: currentUid)
     }
     
     //Storage Reference

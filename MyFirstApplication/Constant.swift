@@ -22,13 +22,10 @@ let PROFILE_IMAGE_URL = "profileImageUrl"
 let STATUS = "status"
 
 //Chat data
-let SENDER_UID = "senderUid"
-let MESSAGE = "message"
-let RECEIVER_UID = "reveiverUid"
-let TIME = "time"
-
-
-
+let SENDER = "sender"
+let RECEIVER = "receiver"
+let TEXT = "text"
+let CREATED_AT = "createdAt"
 
 //Error message
 let ERROR_EMPTY_PHOTO = "Please choose your profile image"

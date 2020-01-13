@@ -34,6 +34,9 @@ class MessageCollectionViewController: UICollectionViewController,UICollectionVi
         return CGSize(width: view.frame.width, height: 80)
     }
     
-//    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//    }
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let layout = UICollectionViewFlowLayout()
+        let controller = ChatLogCollectionViewController(collectionViewLayout: layout)
+        navigationController?.pushViewController(controller, animated: true)
+    }
 }

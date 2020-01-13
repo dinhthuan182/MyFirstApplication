@@ -29,6 +29,8 @@
 		AD701D7523C5E7500066D46C /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD701D7423C5E7500066D46C /* UIImage+extensions.swift */; };
 		AD7D691923C8D5CC0044ED27 /* ChatLogCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7D691823C8D5CC0044ED27 /* ChatLogCollectionViewController.swift */; };
 		AD7D691B23C8D87F0044ED27 /* ChatApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7D691A23C8D87F0044ED27 /* ChatApi.swift */; };
+		AD8FAD7723CC571000BC8ED2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8FAD7623CC571000BC8ED2 /* User.swift */; };
+		AD8FAD7B23CC589900BC8ED2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8FAD7A23CC589900BC8ED2 /* Message.swift */; };
 		AD95262023C72F0C007B60B2 /* MessageCollectionViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD95261F23C72F0C007B60B2 /* MessageCollectionViewController+UI.swift */; };
 		AD95262223C7301E007B60B2 /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD95262123C7301E007B60B2 /* MessageCollectionViewCell.swift */; };
 		ADC3266F23C6320800F4AFCF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC3266E23C6320800F4AFCF /* SignUpViewController.swift */; };
@@ -60,6 +62,8 @@
 		AD701D7423C5E7500066D46C /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		AD7D691823C8D5CC0044ED27 /* ChatLogCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogCollectionViewController.swift; sourceTree = "<group>"; };
 		AD7D691A23C8D87F0044ED27 /* ChatApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApi.swift; sourceTree = "<group>"; };
+		AD8FAD7623CC571000BC8ED2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		AD8FAD7A23CC589900BC8ED2 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		AD95261F23C72F0C007B60B2 /* MessageCollectionViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageCollectionViewController+UI.swift"; sourceTree = "<group>"; };
 		AD95262123C7301E007B60B2 /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
 		ADC3266E23C6320800F4AFCF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 				AD08E94323C6E57800F73B45 /* ReferenceDatabase.swift */,
 				AD08E94523C6E8C000F73B45 /* StorageService.swift */,
 				AD7D691A23C8D87F0044ED27 /* ChatApi.swift */,
+				AD8FAD7623CC571000BC8ED2 /* User.swift */,
+				AD8FAD7A23CC589900BC8ED2 /* Message.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -306,12 +312,14 @@
 				AD08E93023C6D15200F73B45 /* MessageCollectionViewController.swift in Sources */,
 				AD701D5823C58F0F0066D46C /* AppDelegate.swift in Sources */,
 				AD08E94423C6E57800F73B45 /* ReferenceDatabase.swift in Sources */,
+				AD8FAD7723CC571000BC8ED2 /* User.swift in Sources */,
 				AD08E94023C6DF8000F73B45 /* UserApi.swift in Sources */,
 				AD08E93423C6D17400F73B45 /* ProfileViewController.swift in Sources */,
 				AD701D5A23C58F0F0066D46C /* SceneDelegate.swift in Sources */,
 				AD7D691B23C8D87F0044ED27 /* ChatApi.swift in Sources */,
 				AD08E93223C6D16000F73B45 /* HomeViewController.swift in Sources */,
 				AD08E93A23C6DB4000F73B45 /* Constant.swift in Sources */,
+				AD8FAD7B23CC589900BC8ED2 /* Message.swift in Sources */,
 				AD08E94623C6E8C000F73B45 /* StorageService.swift in Sources */,
 				AD701D6D23C593BA0066D46C /* SignInViewController.swift in Sources */,
 				ADC3267123C6322000F4AFCF /* SignUpViewController+UI.swift in Sources */,

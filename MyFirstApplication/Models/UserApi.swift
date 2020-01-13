@@ -29,7 +29,6 @@ class UserApi {
                 ProgressHUD.showError(error?.localizedDescription)
                 return
             }
-            
             if let authData = authDataResult {
                 let dict: Dictionary<String, Any> = [
                     UID: authData.user.uid,
