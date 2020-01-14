@@ -31,7 +31,6 @@ class UserApi {
             }
             if let authData = authDataResult {
                 let dict: Dictionary<String, Any> = [
-                    UID: authData.user.uid,
                     EMAIL: authData.user.email!,
                     FULLNAME: fullName,
                     PROFILE_IMAGE_URL: "",

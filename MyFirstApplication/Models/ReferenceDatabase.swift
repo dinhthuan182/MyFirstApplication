@@ -33,11 +33,6 @@ class ReferenDatabase {
         return databaseChats.child(uid)
     }
     
-    //load message of current user
-    func loadAllMessage(currentUid: String) -> DatabaseQuery {
-        //return databaseChats.queryStarting(atValue: currentUid)
-        return databaseChats.queryEnding(atValue: currentUid)
-    }
     
     //Storage Reference
     let storageRoot = Storage.storage().reference(forURL: URL_STORAGE_ROOT)

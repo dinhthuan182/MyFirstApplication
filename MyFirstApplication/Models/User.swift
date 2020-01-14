@@ -8,17 +8,9 @@
 
 import UIKit
 
-class User {
-    var uid: String?
-    var fullName: String
-    var email: String
-    var avatarUrl: String?
-    
-    init(uid: String, fullName: String, email: String, avatarUrl: String?) {
-        self.fullName = fullName
-        self.email = email
-        if let url = avatarUrl {
-            self.avatarUrl = url
-        }
-    }
+class User: NSObject {
+    @objc var email: String?
+    @objc var fullName: String?
+    @objc var profileImageUrl: String?
+    @objc var status: String?
 }

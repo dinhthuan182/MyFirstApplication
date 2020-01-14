@@ -17,7 +17,7 @@ let PROFILE_STORAGE = "profiles"
 //User data
 let UID = "uid"
 let EMAIL = "email"
-let FULLNAME = "fullname"
+let FULLNAME = "fullName"
 let PROFILE_IMAGE_URL = "profileImageUrl"
 let STATUS = "status"
 

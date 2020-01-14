@@ -424,21 +424,34 @@
             </objects>
             <point key="canvasLocation" x="-3784" y="1074"/>
         </scene>
-        <!--Home-->
-        <scene sceneID="aO7-R8-tTc">
+        <!--Friend List View Controller-->
+        <scene sceneID="nek-5A-MP2">
             <objects>
-                <viewController id="tb9-tu-i4e" customClass="HomeViewController" customModule="MyFirstApplication" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XSv-mW-74z">
+                <tableViewController id="C8w-vI-HP6" customClass="FriendListViewController" customModule="MyFirstApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="H3v-r0-iMe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="96f-gy-HTb"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="Home" image="house" catalog="system" selectedImage="house.fill" id="V1v-sq-0q3"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ffg-Om-fSJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="0vi-Ig-x6A">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0vi-Ig-x6A" id="Oac-hy-XJL">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="C8w-vI-HP6" id="lp2-sV-hrf"/>
+                            <outlet property="delegate" destination="C8w-vI-HP6" id="Gkq-ph-gLV"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="MKk-yB-dzz"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nm2-d7-NJD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1784" y="301"/>
+            <point key="canvasLocation" x="-794" y="292"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="5nn-er-l27">
@@ -482,8 +495,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="Mus-rB-1Fk" kind="relationship" relationship="viewControllers" id="Y9f-Ul-B6b"/>
-                        <segue destination="tb9-tu-i4e" kind="relationship" relationship="viewControllers" id="7EI-HO-E3G"/>
-                        <segue destination="9eK-Vk-3Gg" kind="relationship" relationship="viewControllers" id="ZBW-u1-bum"/>
+                        <segue destination="8gF-VS-0Nh" kind="relationship" relationship="viewControllers" id="jsS-BU-aMW"/>
+                        <segue destination="9eK-Vk-3Gg" kind="relationship" relationship="viewControllers" id="R36-7i-3bb"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNY-qh-lOV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -563,17 +576,36 @@
             </objects>
             <point key="canvasLocation" x="-1784" y="1075"/>
         </scene>
+        <!--Friends-->
+        <scene sceneID="5qQ-6w-n67">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8gF-VS-0Nh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Friends" image="person.3" catalog="system" selectedImage="person.3.fill" id="z78-WL-rG7"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QCK-Mh-6dM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="C8w-vI-HP6" kind="relationship" relationship="rootViewController" id="zv7-Ci-yeX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cDz-Oq-mCP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1784" y="292"/>
+        </scene>
     </scenes>
     <resources>
         <image name="email_white" width="100" height="100"/>
         <image name="facebook_color" width="96" height="96"/>
         <image name="google_color" width="144" height="144"/>
-        <image name="house" catalog="system" width="64" height="54"/>
-        <image name="house.fill" catalog="system" width="64" height="52"/>
         <image name="message" catalog="system" width="64" height="56"/>
         <image name="message.fill" catalog="system" width="64" height="56"/>
         <image name="password_white" width="96" height="96"/>
         <image name="person" catalog="system" width="64" height="58"/>
+        <image name="person.3" catalog="system" width="72" height="35"/>
+        <image name="person.3.fill" catalog="system" width="71" height="34"/>
         <image name="person.fill" catalog="system" width="64" height="60"/>
         <image name="user_white" width="50" height="50"/>
     </resources>
