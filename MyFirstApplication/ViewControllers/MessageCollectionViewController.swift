@@ -35,8 +35,8 @@ class MessageCollectionViewController: UICollectionViewController,UICollectionVi
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let layout = UICollectionViewFlowLayout()
-        let controller = ChatLogCollectionViewController(collectionViewLayout: layout)
+        //let layout = UICollectionViewFlowLayout()
+        let controller = ChatLogController()
         navigationController?.pushViewController(controller, animated: true)
     }
 }
