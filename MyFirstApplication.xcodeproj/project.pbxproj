@@ -29,11 +29,12 @@
 		AD7D691B23C8D87F0044ED27 /* ChatApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7D691A23C8D87F0044ED27 /* ChatApi.swift */; };
 		AD8619BE23CCCB0A000D4AFF /* FriendListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8619BD23CCCB0A000D4AFF /* FriendListViewController.swift */; };
 		AD8FAD7723CC571000BC8ED2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8FAD7623CC571000BC8ED2 /* User.swift */; };
-		AD8FAD7B23CC589900BC8ED2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8FAD7A23CC589900BC8ED2 /* Message.swift */; };
 		AD944D9A23CD689400A37BD3 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD944D9923CD689400A37BD3 /* UIImageView+Extensions.swift */; };
 		AD944D9C23CD731D00A37BD3 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD944D9B23CD731D00A37BD3 /* ChatLogController.swift */; };
-		AD95262023C72F0C007B60B2 /* MessageCollectionViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD95261F23C72F0C007B60B2 /* MessageCollectionViewController+UI.swift */; };
+		AD944D9E23CD81BD00A37BD3 /* ChatLogController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD944D9D23CD81BD00A37BD3 /* ChatLogController+UI.swift */; };
+		AD944DA023CDAF9E00A37BD3 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD944D9F23CDAF9E00A37BD3 /* Message.swift */; };
 		AD95262223C7301E007B60B2 /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD95262123C7301E007B60B2 /* MessageCollectionViewCell.swift */; };
+		AD9809EB23CEF7EA00FD7A6F /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9809EA23CEF7EA00FD7A6F /* ChatMessageCell.swift */; };
 		ADC3266F23C6320800F4AFCF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC3266E23C6320800F4AFCF /* SignUpViewController.swift */; };
 		ADC3267123C6322000F4AFCF /* SignUpViewController+UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC3267023C6322000F4AFCF /* SignUpViewController+UI.swift */; };
 /* End PBXBuildFile section */
@@ -63,11 +64,12 @@
 		AD7D691A23C8D87F0044ED27 /* ChatApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatApi.swift; sourceTree = "<group>"; };
 		AD8619BD23CCCB0A000D4AFF /* FriendListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListViewController.swift; sourceTree = "<group>"; };
 		AD8FAD7623CC571000BC8ED2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		AD8FAD7A23CC589900BC8ED2 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		AD944D9923CD689400A37BD3 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		AD944D9B23CD731D00A37BD3 /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
-		AD95261F23C72F0C007B60B2 /* MessageCollectionViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageCollectionViewController+UI.swift"; sourceTree = "<group>"; };
+		AD944D9D23CD81BD00A37BD3 /* ChatLogController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatLogController+UI.swift"; sourceTree = "<group>"; };
+		AD944D9F23CDAF9E00A37BD3 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		AD95262123C7301E007B60B2 /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
+		AD9809EA23CEF7EA00FD7A6F /* ChatMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCell.swift; sourceTree = "<group>"; };
 		ADC3266E23C6320800F4AFCF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		ADC3267023C6322000F4AFCF /* SignUpViewController+UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUpViewController+UI.swift"; sourceTree = "<group>"; };
 		BB0E25C21687B9477EE452C0 /* Pods_MyFirstApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyFirstApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,7 +106,7 @@
 				AD08E94523C6E8C000F73B45 /* StorageService.swift */,
 				AD7D691A23C8D87F0044ED27 /* ChatApi.swift */,
 				AD8FAD7623CC571000BC8ED2 /* User.swift */,
-				AD8FAD7A23CC589900BC8ED2 /* Message.swift */,
+				AD944D9F23CDAF9E00A37BD3 /* Message.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -157,6 +159,7 @@
 				AD95262123C7301E007B60B2 /* MessageCollectionViewCell.swift */,
 				AD8619BD23CCCB0A000D4AFF /* FriendListViewController.swift */,
 				AD944D9B23CD731D00A37BD3 /* ChatLogController.swift */,
+				AD9809EA23CEF7EA00FD7A6F /* ChatMessageCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -166,7 +169,7 @@
 			children = (
 				AD701D6F23C5C4B50066D46C /* SignInViewController+UI.swift */,
 				ADC3267023C6322000F4AFCF /* SignUpViewController+UI.swift */,
-				AD95261F23C72F0C007B60B2 /* MessageCollectionViewController+UI.swift */,
+				AD944D9D23CD81BD00A37BD3 /* ChatLogController+UI.swift */,
 			);
 			path = "Extensions+UI";
 			sourceTree = "<group>";
@@ -306,7 +309,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD944D9C23CD731D00A37BD3 /* ChatLogController.swift in Sources */,
-				AD95262023C72F0C007B60B2 /* MessageCollectionViewController+UI.swift in Sources */,
 				AD701D7023C5C4B50066D46C /* SignInViewController+UI.swift in Sources */,
 				AD95262223C7301E007B60B2 /* MessageCollectionViewCell.swift in Sources */,
 				ADC3266F23C6320800F4AFCF /* SignUpViewController.swift in Sources */,
@@ -317,16 +319,18 @@
 				AD701D5823C58F0F0066D46C /* AppDelegate.swift in Sources */,
 				AD08E94423C6E57800F73B45 /* ReferenceDatabase.swift in Sources */,
 				AD8FAD7723CC571000BC8ED2 /* User.swift in Sources */,
+				AD9809EB23CEF7EA00FD7A6F /* ChatMessageCell.swift in Sources */,
+				AD944D9E23CD81BD00A37BD3 /* ChatLogController+UI.swift in Sources */,
 				AD08E94023C6DF8000F73B45 /* UserApi.swift in Sources */,
 				AD8619BE23CCCB0A000D4AFF /* FriendListViewController.swift in Sources */,
 				AD08E93423C6D17400F73B45 /* ProfileViewController.swift in Sources */,
 				AD701D5A23C58F0F0066D46C /* SceneDelegate.swift in Sources */,
 				AD7D691B23C8D87F0044ED27 /* ChatApi.swift in Sources */,
 				AD08E93A23C6DB4000F73B45 /* Constant.swift in Sources */,
-				AD8FAD7B23CC589900BC8ED2 /* Message.swift in Sources */,
 				AD08E94623C6E8C000F73B45 /* StorageService.swift in Sources */,
 				AD701D6D23C593BA0066D46C /* SignInViewController.swift in Sources */,
 				ADC3267123C6322000F4AFCF /* SignUpViewController+UI.swift in Sources */,
+				AD944DA023CDAF9E00A37BD3 /* Message.swift in Sources */,
 				AD08E93E23C6DF6800F73B45 /* Api.swift in Sources */,
 				AD701D7523C5E7500066D46C /* UIImage+extensions.swift in Sources */,
 			);

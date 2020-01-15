@@ -46,13 +46,13 @@ class UserApi {
                     return
                 }
                 
-                let storageProfile = ReferenDatabase().storageSpecificProfile(uid: authData.user.uid)
+                let storageProfile = Ref().storageSpecificProfile(uid: authData.user.uid)
                 let metaData = StorageMetadata()
                 metaData.contentType = "image/jpg"
                 
                 StorageService.savePhoto(email: email, uid: authData.user.uid, data: imageData, metaData: metaData, storageProfileRef: storageProfile, dict: dict, onSuccess: {
                     onSuccess()
-                }, onError: {(errorMessage) in
+                }, onError: { (errorMessage) in
                     onError(errorMessage)
                 })
             }

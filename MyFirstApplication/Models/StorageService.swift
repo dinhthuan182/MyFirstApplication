@@ -35,7 +35,7 @@ class StorageService {
                     var dictNew = dict
                     dictNew[PROFILE_IMAGE_URL] = metaImageUrl
                     
-                    ReferenDatabase().databaseSpecificUser(uid: uid).updateChildValues(dictNew){ (error, ref) in
+                    Ref().databaseSpecificUser(uid: uid).updateChildValues(dictNew){ (error, ref) in
                         if error == nil {
                             onSuccess()
                         } else {

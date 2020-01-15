@@ -70,6 +70,7 @@ class SignInViewController: UIViewController {
         self.signIn(onSucess: {
             //Switch view
             self.performSegue(withIdentifier: "signInVCToMainTabBarVC", sender: nil)
+            
         }, onError: { (errorMessage) in
             ProgressHUD.showError(errorMessage)
         })    }
