@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MessageCollectionViewCell: UICollectionViewCell {
     let profileImageView: UIImageView = {
@@ -49,6 +50,34 @@ class MessageCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    var message: Message? {
+        didSet {
+            self.setupNameAndAvatar()
+            self.messageLabel.text = message?.content
+            if let seconds = message?.timestamp?.doubleValue {
+                let timestampDate = NSDate(timeIntervalSince1970: seconds)
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "hh:mm a"
+                self.timeLabel.text = dateFormatter.string(from: timestampDate as Date)
+            }
+        }
+    }
+    
+    private func setupNameAndAvatar() {
+        
+        
+        if let uid = message?.chatPartnerId() {
+            Ref().databaseSpecificUser(uid: uid).observeSingleEvent(of: .value, with: { (snapshot) in
+                if let dictionary = snapshot.value as? [String: AnyObject] {
+                
+                    self.profileImageView.loadImageUsingCacheWithUrlString(urlString: dictionary[PROFILE_IMAGE_URL] as! String)
+                    self.hasReadImageView.loadImageUsingCacheWithUrlString(urlString: dictionary[PROFILE_IMAGE_URL] as! String)
+                    self.senderLabel.text = dictionary[FULLNAME] as? String
+                    
+                }
+            }, withCancel: nil)
+        }
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
     }

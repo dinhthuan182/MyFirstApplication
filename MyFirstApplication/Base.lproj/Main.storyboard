@@ -514,7 +514,7 @@
         <!--Main Tab Bar View Controller-->
         <scene sceneID="u6U-dM-ya0">
             <objects>
-                <tabBarController storyboardIdentifier="MainTabBarViewController" automaticallyAdjustsScrollViewInsets="NO" id="boN-Dy-7PG" customClass="MainTabBarViewController" customModule="MyFirstApplication" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarViewController" automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="boN-Dy-7PG" customClass="MainTabBarViewController" customModule="MyFirstApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="2hi-wQ-I1I"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="D6u-8H-Luc">

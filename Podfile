@@ -12,7 +12,7 @@ target 'MyFirstApplication' do
   pod 'Firebase/Storage'
   
   pod 'ProgressHUD'
-  pod 'MessageKit'
+  #pod 'MessageKit'
   #pod 'JSQMessagesViewController'
   # Pods for MyFirstApplication
 

@@ -10,11 +10,11 @@ import Foundation
 import FirebaseDatabase
 import FirebaseStorage
 
-class ReferenDatabase {
-    //Database Reference
+class Ref {
+    //database reference
     let databaseRoot: DatabaseReference = Database.database().reference()
     
-    //User Table
+    //users tree
     var databaseUsers: DatabaseReference {
         return databaseRoot.child(REF_USER)
     }
@@ -23,23 +23,35 @@ class ReferenDatabase {
         return databaseUsers.child(uid)
     }
     
-    //Chat table
+    //chats tree
     var databaseChats: DatabaseReference {
         return databaseRoot.child(REF_CHAT)
     }
     
-    //create a node
+    func databaseAutoUidChats() -> DatabaseReference {
+        return databaseChats.childByAutoId()
+    }
+    
     func databaseSpecificChat(uid: String) -> DatabaseReference {
         return databaseChats.child(uid)
     }
     
+    //user-messages tree
+    var databaseUserMessages: DatabaseReference {
+        return databaseRoot.child(REF_USER_MESSAGES)
+    }
     
-    //Storage Reference
+    func databaseSpecificUserMessages(uid: String) -> DatabaseReference {
+        return databaseUserMessages.child(uid)
+    }
+    
+    //storage reference
     let storageRoot = Storage.storage().reference(forURL: URL_STORAGE_ROOT)
     
     var storageProfile: StorageReference {
         return storageRoot.child(PROFILE_STORAGE)
     }
+    
     func storageSpecificProfile(uid: String) -> StorageReference {
         return storageProfile.child(uid)
     }
