@@ -13,6 +13,8 @@ class MessageCollectionViewController: UICollectionViewController,UICollectionVi
     private let cellId = "cellId"
     var messages = [Message]()
     var messagesDictionary = [String: Message]()
+    var timer: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,13 +56,21 @@ class MessageCollectionViewController: UICollectionViewController,UICollectionVi
                         }
                     }
                     
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
-                    }
+                    //reduce loaded data
+                    self.timer?.invalidate()
+                    self.timer = Timer.scheduledTimer(timeInterval: 0.11, target: self, selector: #selector(self.handleReloadCollection), userInfo: nil, repeats: false)
+                    
                 }
             }, withCancel: nil)
             
         }, withCancel: nil)
+    }
+    
+    @objc func handleReloadCollection() {
+        DispatchQueue.main.async {
+            print("reloaded Data")
+            self.collectionView.reloadData()
+        }
     }
     
     //MARK:- UICollectionViewController

@@ -12,7 +12,7 @@ import FirebaseAuth
 class MessageCollectionViewCell: UICollectionViewCell {
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 35
         imageView.layer.masksToBounds = true
         return imageView
