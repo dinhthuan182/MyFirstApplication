@@ -45,8 +45,9 @@ class MessageCollectionViewController: UICollectionViewController,UICollectionVi
                 if let dict = snapshot.value as? [String: AnyObject] {
                     let message = Message()
                     message.setValuesForKeys(dict)
-                    if let toUid = message.toUid {
-                        self.messagesDictionary[toUid] = message
+                    
+                    if let chatPartnerUid = message.chatPartnerId() {
+                        self.messagesDictionary[chatPartnerUid] = message
                         self.messages = Array(self.messagesDictionary.values)
                         self.messages.sort { (message1, message2) -> Bool in
                             return message1.timestamp!.intValue > message2.timestamp!.intValue
