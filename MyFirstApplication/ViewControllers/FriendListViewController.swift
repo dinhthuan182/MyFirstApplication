@@ -20,10 +20,11 @@ class FriendListViewController: UITableViewController {
     }
     
     func fetchUsers() {
-        ReferenDatabase().databaseUsers.observe(.childAdded, with: { (snapshot) in
+        Ref().databaseUsers.observe(.childAdded, with: { (snapshot) in
             if let dict = snapshot.value as? [String: AnyObject] {
                 let user = User()
                 user.setValuesForKeys(dict)
+                user.uid = snapshot.key
                 self.users.append(user)
                 
                 DispatchQueue.main.async {
@@ -56,13 +57,19 @@ class FriendListViewController: UITableViewController {
         return 80
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = ChatLogController()
+    func showChatLogForUser(user: User) {
+        let layout = UICollectionViewFlowLayout()
+        let controller = ChatLogController(collectionViewLayout: layout)
+        controller.user = user
+        self.hidesBottomBarWhenPushed  = true
         navigationController?.pushViewController(controller, animated: true)
+        self.hidesBottomBarWhenPushed = false
     }
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let user = users[indexPath.row]
+        showChatLogForUser(user: user)
+    }
 }
-
 
 class UserCell: UITableViewCell {
 
@@ -98,6 +105,4 @@ class UserCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
 }
