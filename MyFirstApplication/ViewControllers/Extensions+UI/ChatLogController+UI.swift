@@ -9,15 +9,16 @@
 import UIKit
 
 extension ChatLogController {
+    
     func setupInputComponents() {
         
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.backgroundColor = .white
         view.addSubview(containerView)
-        
+        containerViewBottomAnchor = containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        containerViewBottomAnchor?.isActive = true
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            containerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             containerView.widthAnchor.constraint(equalTo: view.widthAnchor),
             containerView.heightAnchor.constraint(equalToConstant: 50)
         ])
@@ -56,6 +57,29 @@ extension ChatLogController {
             separatorLineView.widthAnchor.constraint(equalTo: containerView.widthAnchor),
             separatorLineView.heightAnchor.constraint(equalToConstant: 1)
         ])
+    }
+    
+    func setupKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyBoardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyBoardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func handleKeyBoardWillShow(notification: NSNotification) {
+        let keyboardFrame = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardDuration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double)
+        containerViewBottomAnchor?.constant = -keyboardFrame.height
+        UIView.animate(withDuration: keyboardDuration) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func handleKeyBoardWillHide(notification: NSNotification) {
+        let keyboardDuration = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double)
+        containerViewBottomAnchor?.constant = 0
+        UIView.animate(withDuration: keyboardDuration) {
+            self.view.layoutIfNeeded()
+        }
     }
     
     @objc func sendMessage() {

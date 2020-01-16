@@ -10,10 +10,11 @@ import UIKit
 import FirebaseAuth
 
 class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
+    var containerViewBottomAnchor: NSLayoutConstraint?
+    
     var user: User? {
         didSet {
             navigationItem.title = user?.fullName
-            
             observeMessages()
         }
     }
@@ -54,16 +55,77 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     let sendButton = UIButton(type: .system)
     let separatorLineView = UIView()
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView.alwaysBounceVertical = true
         self.collectionView.backgroundColor = .white
         self.collectionView.register(ChatMessageCell.self, forCellWithReuseIdentifier: cellId)
-        self.collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 58, right: 0)
-        self.collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
+        self.collectionView.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
+        //self.collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
         
-        self.setupInputComponents()
+        self.collectionView.keyboardDismissMode = .interactive
+
+//        self.setupInputComponents()
+//        self.setupKeyboardObservers()
     }
+    
+    lazy var inputContainerView: UIView = {
+        let container = UIView()
+        container.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 50)
+        container.backgroundColor = .lightGray
+        
+        sendButton.setTitle("Send", for: .normal)
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+        container.addSubview(sendButton)
+        
+        NSLayoutConstraint.activate([
+            sendButton.rightAnchor.constraint(equalTo: container.rightAnchor),
+            sendButton.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+            sendButton.widthAnchor.constraint(equalToConstant: 60),
+            sendButton.heightAnchor.constraint(equalTo: container.heightAnchor)
+        ])
+        
+        self.messageTextField.placeholder = "Enter message here ..."
+        self.messageTextField.translatesAutoresizingMaskIntoConstraints = false
+        self.messageTextField.delegate = self
+        container.addSubview(self.messageTextField)
+        
+        NSLayoutConstraint.activate([
+            self.messageTextField.leftAnchor.constraint(equalTo: container.leftAnchor, constant: 8),
+            self.messageTextField.centerYAnchor.constraint(equalTo: container.centerYAnchor),
+            self.messageTextField.rightAnchor.constraint(equalTo: sendButton.leftAnchor),
+            self.messageTextField.heightAnchor.constraint(equalTo: container.heightAnchor)
+        ])
+        
+        separatorLineView.backgroundColor = .black
+        separatorLineView.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(separatorLineView)
+        
+        NSLayoutConstraint.activate([
+            separatorLineView.topAnchor.constraint(equalTo: container.topAnchor),
+            separatorLineView.leftAnchor.constraint(equalTo: container.leftAnchor),
+            separatorLineView.widthAnchor.constraint(equalTo: container.widthAnchor),
+            separatorLineView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+        return container
+    }()
+    
+    override var inputAccessoryView: UIView? {
+        get {
+            return inputContainerView
+        }
+    }
+
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages.count
     }
@@ -113,7 +175,8 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         if let text = messages[indexPath.item].content {
             height = estimateFrameForText(text: text).height + 15
         }
-        return CGSize(width: view.frame.width, height: height)
+        let width = UIScreen.main.bounds.width
+        return CGSize(width: width, height: height)
     }
     
     private func estimateFrameForText(text: String) -> CGRect {
