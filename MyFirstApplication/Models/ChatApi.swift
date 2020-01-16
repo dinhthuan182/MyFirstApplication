@@ -12,44 +12,30 @@ import FirebaseDatabase
 
 class ChatApi {
     func sendMessage(message: String, toUser: User, onSucess: @escaping() -> Void, onError: @escaping(_ errormessage: String) -> Void) {
-        let chatRef = Ref().databaseAutoUidChats()
-        let toUid = toUser.uid!
-        let fromUid = Auth.auth().currentUser!.uid
-        let timestamp: NSNumber = NSNumber(value: NSDate().timeIntervalSince1970)
-        let messageValues = [CONTENT: message,
-                       TOUID: toUid,
-                       FROMUID: fromUid,
-                       TIMESTAMP: timestamp
-            ] as [String : Any]
-
-        chatRef.updateChildValues(messageValues) { (error, ref) in
-            if error != nil {
-                onError(error! as! String)
-                return
-            }
-            onSucess()
-            let userMessagesRef = Ref().databaseSpecificUserMessages(uid: fromUid)
-            let messageId = chatRef.key!
-            userMessagesRef.updateChildValues([messageId: 1])
-            
-            let recipientUserMessagesRef = Ref().databaseSpecificUserMessages(uid: toUid)
-            recipientUserMessagesRef.updateChildValues([messageId: 1])
-        }
+        let messageValues = [CONTENT: message] as [String : Any]
+        sendMessageWithProperties(properties: messageValues, toUser: toUser, onSucess: onSucess, onError: onError)
     }
     
     func sendMessageWithImage(imageUrl: String, image: UIImage, toUser: User, onSucess: @escaping() -> Void, onError: @escaping(_ errormessage: String) -> Void) {
+        let properties: [String: Any] = [IMAGEURL: imageUrl,
+                                           IMAGEHEIGHT: image.size.height,
+                                           IMAGEWIDTH: image.size.width]
+        sendMessageWithProperties(properties: properties, toUser: toUser, onSucess: onSucess, onError: onError)
+    }
+    
+    private func sendMessageWithProperties(properties: [String: Any], toUser: User, onSucess: @escaping() -> Void, onError: @escaping(_ errormessage: String) -> Void) {
         let chatRef = Ref().databaseAutoUidChats()
         let toUid = toUser.uid!
         let fromUid = Auth.auth().currentUser!.uid
         let timestamp: NSNumber = NSNumber(value: NSDate().timeIntervalSince1970)
-        let message = [TOUID: toUid,
+        var message = [TOUID: toUid,
                        FROMUID: fromUid,
                        TIMESTAMP: timestamp,
-                       IMAGEURL: imageUrl,
-                       IMAGEHEIGHT: image.size.height,
-                       IMAGEWIDTH: image.size.width
             ] as [String : Any]
-
+        //append properties dictionary
+        //key $0, $1
+        properties.forEach({message[$0] = $1})
+        
         chatRef.updateChildValues(message) { (error, ref) in
             if error != nil {
                 onError(error! as! String)
@@ -64,5 +50,4 @@ class ChatApi {
             recipientUserMessagesRef.updateChildValues([messageId: 1])
         }
     }
-    
 }

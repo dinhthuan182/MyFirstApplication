@@ -8,8 +8,6 @@
 
 import UIKit
 import FirebaseAuth
-import FirebaseStorage
-
 class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var containerViewBottomAnchor: NSLayoutConstraint?
     
@@ -43,6 +41,9 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                     
                     DispatchQueue.main.async {
                         self.collectionView.reloadData()
+                        //scroll to the last index
+                        let indexPath = IndexPath(item: self.messages.count - 1, section: 0)
+                        self.collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
                     }
                 }
             }, withCancel: nil)
@@ -71,7 +72,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         
         self.collectionView.keyboardDismissMode = .interactive
 
-//        self.setupKeyboardObservers()
+        self.setupKeyboardObservers()
     }
     
     lazy var inputContainerView: UIView = {
