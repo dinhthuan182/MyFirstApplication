@@ -30,6 +30,9 @@ let FROMUID = "fromUid"
 let CONTENT = "content"
 let TIMESTAMP = "timestamp"
 let IMAGEURL = "imageUrl"
+let IMAGEHEIGHT = "imageHeight"
+let IMAGEWIDTH = "imageWidth"
+
 //Error message
 let ERROR_EMPTY_PHOTO = "Please choose your profile image"
 let ERROR_EMPTY_FULLNAME = "Please enter an full"

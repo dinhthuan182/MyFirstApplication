@@ -45,8 +45,7 @@ class MessageCollectionViewController: UICollectionViewController,UICollectionVi
             let messagesRef = Ref().databaseSpecificChat(uid: messageId)
             messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
                 if let dict = snapshot.value as? [String: AnyObject] {
-                    let message = Message()
-                    message.setValuesForKeys(dict)
+                    let message = Message(dictionary: dict)
                     
                     if let chatPartnerUid = message.chatPartnerId() {
                         self.messagesDictionary[chatPartnerUid] = message

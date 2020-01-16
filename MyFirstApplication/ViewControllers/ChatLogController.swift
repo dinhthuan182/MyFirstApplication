@@ -37,8 +37,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                     return
                 }
                 
-                let message = Message()
-                message.setValuesForKeys(messageDict)
+                let message = Message(dictionary: messageDict)
                 if message.chatPartnerId() == self.user?.uid {
                     self.messages.append(message)
                     
@@ -152,7 +151,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
                 
                 ref.downloadURL { (url, erroe) in
                     if let metaImageUrl = url?.absoluteString {
-                        Api.chats.sendMessageWithImage(imageUrl: metaImageUrl, toUser: self.user!, onSucess: {
+                        Api.chats.sendMessageWithImage(imageUrl: metaImageUrl, image: image, toUser: self.user!, onSucess: {
                             print("send image success")
                         }) { (error) in
                             print(error)
@@ -195,7 +194,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         if let content = message.content {
             cell.bubbleWidthAnchor?.constant = estimateFrameForText(text: content).width + 27
             
+        } else if message.imageUrl != nil {
+            //fall in here if its an image message
+            cell.bubbleWidthAnchor?.constant = 200
         }
+        
         return cell
     }
     
@@ -237,8 +240,11 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var height: CGFloat = 80
-        if let text = messages[indexPath.item].content {
+        let message = messages[indexPath.item]
+        if let text = message.content {
             height = estimateFrameForText(text: text).height + 18
+        } else if let imageWidth = message.imageWidth?.floatValue, let imageHeight = message.imageHeight?.floatValue {
+            height = CGFloat(imageHeight / imageWidth * 200)
         }
         let width = UIScreen.main.bounds.width
         return CGSize(width: width, height: height)

@@ -37,15 +37,17 @@ class ChatApi {
         }
     }
     
-    func sendMessageWithImage(imageUrl: String, toUser: User, onSucess: @escaping() -> Void, onError: @escaping(_ errormessage: String) -> Void) {
+    func sendMessageWithImage(imageUrl: String, image: UIImage, toUser: User, onSucess: @escaping() -> Void, onError: @escaping(_ errormessage: String) -> Void) {
         let chatRef = Ref().databaseAutoUidChats()
         let toUid = toUser.uid!
         let fromUid = Auth.auth().currentUser!.uid
         let timestamp: NSNumber = NSNumber(value: NSDate().timeIntervalSince1970)
-        let message = [IMAGEURL: imageUrl,
-                       TOUID: toUid,
+        let message = [TOUID: toUid,
                        FROMUID: fromUid,
-                       TIMESTAMP: timestamp
+                       TIMESTAMP: timestamp,
+                       IMAGEURL: imageUrl,
+                       IMAGEHEIGHT: image.size.height,
+                       IMAGEWIDTH: image.size.width
             ] as [String : Any]
 
         chatRef.updateChildValues(message) { (error, ref) in
