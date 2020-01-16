@@ -32,10 +32,19 @@ class ChatMessageCell: UICollectionViewCell {
     
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "mark-zuckerberg")
         imageView.layer.cornerRadius = 16
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    let messageImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 16
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.backgroundColor = .lightGray
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -50,11 +59,20 @@ class ChatMessageCell: UICollectionViewCell {
         self.addSubview(textView)
         self.addSubview(profileImageView)
         
+        bubbleView.addSubview(messageImageView)
+        NSLayoutConstraint.activate([
+            messageImageView.topAnchor.constraint(equalTo: bubbleView.topAnchor),
+            messageImageView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor),
+            messageImageView.widthAnchor.constraint(equalTo: bubbleView.widthAnchor),
+            messageImageView.heightAnchor.constraint(equalTo: bubbleView.heightAnchor)
+        ])
+        
         bubbleViewRightAuchor = bubbleView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)
         bubbleViewLeftAuchor = bubbleView.leftAnchor.constraint(equalTo: profileImageView.rightAnchor, constant: 8)
         
         bubbleWidthAnchor = bubbleView.widthAnchor.constraint(equalToConstant: 200)
         bubbleViewLeftAuchor?.isActive = false
+        
         NSLayoutConstraint.activate([
             bubbleView.topAnchor.constraint(equalTo: self.topAnchor),
             bubbleView.heightAnchor.constraint(equalTo: self.heightAnchor),

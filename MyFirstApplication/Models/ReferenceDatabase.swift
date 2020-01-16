@@ -55,4 +55,13 @@ class Ref {
     func storageSpecificProfile(uid: String) -> StorageReference {
         return storageProfile.child(uid)
     }
+    
+    //message-images
+    var storegeMessageImages: StorageReference {
+        return storageRoot.child(REF_MESSAGE_IMAGES)
+    }
+    
+    func storageSpecificMessageImages(imageName: String) -> StorageReference {
+        return storegeMessageImages.child(imageName)
+    }
 }

@@ -16,7 +16,33 @@ class ChatApi {
         let toUid = toUser.uid!
         let fromUid = Auth.auth().currentUser!.uid
         let timestamp: NSNumber = NSNumber(value: NSDate().timeIntervalSince1970)
-        let message = [CONTENT: message,
+        let messageValues = [CONTENT: message,
+                       TOUID: toUid,
+                       FROMUID: fromUid,
+                       TIMESTAMP: timestamp
+            ] as [String : Any]
+
+        chatRef.updateChildValues(messageValues) { (error, ref) in
+            if error != nil {
+                onError(error! as! String)
+                return
+            }
+            onSucess()
+            let userMessagesRef = Ref().databaseSpecificUserMessages(uid: fromUid)
+            let messageId = chatRef.key!
+            userMessagesRef.updateChildValues([messageId: 1])
+            
+            let recipientUserMessagesRef = Ref().databaseSpecificUserMessages(uid: toUid)
+            recipientUserMessagesRef.updateChildValues([messageId: 1])
+        }
+    }
+    
+    func sendMessageWithImage(imageUrl: String, toUser: User, onSucess: @escaping() -> Void, onError: @escaping(_ errormessage: String) -> Void) {
+        let chatRef = Ref().databaseAutoUidChats()
+        let toUid = toUser.uid!
+        let fromUid = Auth.auth().currentUser!.uid
+        let timestamp: NSNumber = NSNumber(value: NSDate().timeIntervalSince1970)
+        let message = [IMAGEURL: imageUrl,
                        TOUID: toUid,
                        FROMUID: fromUid,
                        TIMESTAMP: timestamp
@@ -36,4 +62,5 @@ class ChatApi {
             recipientUserMessagesRef.updateChildValues([messageId: 1])
         }
     }
+    
 }
