@@ -10,6 +10,19 @@ import UIKit
 import FirebaseAuth
 class ChatLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var containerViewBottomAnchor: NSLayoutConstraint?
+
+    let cellId = "cellId"
+    let containerView = UIView()
+    let messageTextField = UITextField()
+    let uploadImageView = UIImageView()
+    let sendButton = UIButton(type: .system)
+    let separatorLineView = UIView()
+    
+    var messages = [Message]()
+    
+    var startingFrame: CGRect?
+    var blackBackgroundView: UIView?
+    var startingImageView: UIImageView?
     
     var user: User? {
         didSet {
@@ -17,8 +30,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             observeMessages()
         }
     }
-    
-    var messages = [Message]()
+
     
     func observeMessages() {
         guard let currentUid = Auth.auth().currentUser?.uid else {
@@ -49,13 +61,6 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             }, withCancel: nil)
         }, withCancel: nil)
     }
-    
-    let cellId = "cellId"
-    let containerView = UIView()
-    let messageTextField = UITextField()
-    let uploadImageView = UIImageView()
-    let sendButton = UIButton(type: .system)
-    let separatorLineView = UIView()
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -188,16 +193,19 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMessageCell
         
+        cell.chatLogController = self
+        
         let message = messages[indexPath.item]
         cell.textView.text = message.content
         
         setupCell(cell: cell, message: message)
         if let content = message.content {
             cell.bubbleWidthAnchor?.constant = estimateFrameForText(text: content).width + 27
-            
+            cell.textView.isHidden = false
         } else if message.imageUrl != nil {
             //fall in here if its an image message
             cell.bubbleWidthAnchor?.constant = 200
+            cell.textView.isHidden = true
         }
         
         return cell
@@ -255,5 +263,62 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
         let size = CGSize(width: 200, height: 1000)
         let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
         return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)], context: nil)
+    }
+    
+    //custom zooming logic
+    func performZoomInForImageView(startingImageView: UIImageView) {
+        self.startingImageView = startingImageView
+        self.startingImageView?.isHidden = true
+        // get frame of image message
+        startingFrame = startingImageView.superview?.convert(startingImageView.frame, to: nil)
+        let zoomingImageView = UIImageView(frame: startingFrame!)
+        zoomingImageView.backgroundColor = .red
+        zoomingImageView.image = startingImageView.image
+        zoomingImageView.isUserInteractionEnabled = true
+        zoomingImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoomOut)))
+        
+        //if let keyWindow = UIApplication.shared.keyWindow {
+        if let keyWindow = UIApplication.shared.connectedScenes
+            .filter({$0.activationState == .foregroundActive})
+            .map({$0 as? UIWindowScene})
+            .compactMap({$0})
+            .first?.windows
+            .filter({$0.isKeyWindow}).first {
+            keyWindow.endEditing(true)
+            
+            blackBackgroundView = UIView(frame: keyWindow.frame)
+            blackBackgroundView?.backgroundColor = .black
+            blackBackgroundView?.alpha = 0
+            keyWindow.addSubview(blackBackgroundView!)
+            
+            keyWindow.addSubview(zoomingImageView)
+            //hidden input area when show image
+            self.inputContainerView.alpha = 0
+            
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                self.blackBackgroundView?.alpha = 1
+                let height = self.startingFrame!.height / self.startingFrame!.width * keyWindow.frame.width
+                
+                zoomingImageView.frame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
+                zoomingImageView.center = keyWindow.center
+            }, completion: nil)
+        }
+    }
+    
+    @objc func handleZoomOut(tapGuesture: UITapGestureRecognizer) {
+        if let zoomOutImageView = tapGuesture.view {
+            //need to animate back out to contronler
+            zoomOutImageView.layer.cornerRadius = 16
+            zoomOutImageView.layer.masksToBounds = true
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+                zoomOutImageView.frame = self.startingFrame!
+                self.blackBackgroundView?.alpha = 0
+                self.inputContainerView.alpha = 1
+            }) { (completed: Bool) in
+                //remove image after zoom
+                zoomOutImageView.removeFromSuperview()
+                self.startingImageView?.isHidden = false
+            }
+        }
     }
 }
