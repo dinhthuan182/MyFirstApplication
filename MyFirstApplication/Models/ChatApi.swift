@@ -23,7 +23,7 @@ class ChatApi {
         sendMessageWithProperties(properties: properties, toUser: toUser, onSucess: onSucess, onError: onError)
     }
     
-    private func sendMessageWithProperties(properties: [String: Any], toUser: User, onSucess: @escaping() -> Void, onError: @escaping(_ errormessage: String) -> Void) {
+    func sendMessageWithProperties(properties: [String: Any], toUser: User, onSucess: @escaping() -> Void, onError: @escaping(_ errormessage: String) -> Void) {
         let chatRef = Ref().databaseAutoUidChats()
         let toUid = toUser.uid!
         let fromUid = Auth.auth().currentUser!.uid

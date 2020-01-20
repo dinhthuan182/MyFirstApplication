@@ -9,13 +9,14 @@
 import Foundation
 
 let REF_USER = "users"
-let REF_CHAT = "messages"
+let REF_MESSAGE = "messages"
 let REF_USER_MESSAGES = "user-messages"
-let REF_MESSAGE_IMAGES = "message-images"
 
 //storage data reference constant
 let URL_STORAGE_ROOT = "gs://chatapp-8f79c.appspot.com"
 let PROFILE_STORAGE = "profiles"
+let MESSAGE_IMAGES_STORAGE = "message-images"
+let MESSAGE_MOVIE_STORAGE = "message-movies"
 
 //User data
 let UID = "uid"
@@ -32,6 +33,7 @@ let TIMESTAMP = "timestamp"
 let IMAGEURL = "imageUrl"
 let IMAGEHEIGHT = "imageHeight"
 let IMAGEWIDTH = "imageWidth"
+let VIDEOURL = "videoUrl"
 
 //Error message
 let ERROR_EMPTY_PHOTO = "Please choose your profile image"

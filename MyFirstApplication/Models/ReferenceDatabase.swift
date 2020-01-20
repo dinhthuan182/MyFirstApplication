@@ -11,57 +11,74 @@ import FirebaseDatabase
 import FirebaseStorage
 
 class Ref {
-    //database reference
+    // database reference
     let databaseRoot: DatabaseReference = Database.database().reference()
     
-    //users tree
+    // users
     var databaseUsers: DatabaseReference {
         return databaseRoot.child(REF_USER)
     }
     
+    // users/uid
     func databaseSpecificUser(uid: String) -> DatabaseReference {
         return databaseUsers.child(uid)
     }
     
-    //chats tree
+    // messages
     var databaseChats: DatabaseReference {
-        return databaseRoot.child(REF_CHAT)
+        return databaseRoot.child(REF_MESSAGE)
     }
     
+    // messages/autoID
     func databaseAutoUidChats() -> DatabaseReference {
         return databaseChats.childByAutoId()
     }
     
+    // messages/uid
     func databaseSpecificChat(uid: String) -> DatabaseReference {
         return databaseChats.child(uid)
     }
     
-    //user-messages tree
+    // user-messages
     var databaseUserMessages: DatabaseReference {
         return databaseRoot.child(REF_USER_MESSAGES)
     }
     
+    // user-messages/uid
     func databaseSpecificUserMessages(uid: String) -> DatabaseReference {
         return databaseUserMessages.child(uid)
     }
     
-    //storage reference
+    // storage reference
     let storageRoot = Storage.storage().reference(forURL: URL_STORAGE_ROOT)
     
+    // profiles
     var storageProfile: StorageReference {
         return storageRoot.child(PROFILE_STORAGE)
     }
     
+    // profiles/uid
     func storageSpecificProfile(uid: String) -> StorageReference {
         return storageProfile.child(uid)
     }
     
-    //message-images
+    // message-images
     var storegeMessageImages: StorageReference {
-        return storageRoot.child(REF_MESSAGE_IMAGES)
+        return storageRoot.child(MESSAGE_IMAGES_STORAGE)
     }
     
+    // message-images/imageName
     func storageSpecificMessageImages(imageName: String) -> StorageReference {
         return storegeMessageImages.child(imageName)
+    }
+    
+    // message-movies
+    var storageMessageMovies: StorageReference {
+        return storageRoot.child(MESSAGE_MOVIE_STORAGE)
+    }
+    
+    // message-movies/fileName
+    func storageSpecificMessageMovies(fileName: String) -> StorageReference {
+        return storageMessageMovies.child(fileName)
     }
 }

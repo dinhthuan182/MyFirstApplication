@@ -31,7 +31,7 @@ class MessageCollectionViewController: UICollectionViewController,UICollectionVi
         messagesDictionary.removeAll()
         self.collectionView.reloadData()
         
-         observeUserMessage()
+        observeUserMessage()
     }
     
     func observeUserMessage() {
@@ -67,7 +67,7 @@ class MessageCollectionViewController: UICollectionViewController,UICollectionVi
     
     @objc func handleReloadCollection() {
         DispatchQueue.main.async {
-            print("reloaded Data")
+            //reload data of message collection
             self.collectionView.reloadData()
         }
     }
