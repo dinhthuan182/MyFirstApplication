@@ -7,11 +7,51 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ChatMessageCell: UICollectionViewCell {
     static let messageBlueColor = UIColor.customRGB(0, 137, 249, 1)
     
+    var message: Message?
     var chatLogController: ChatLogController?
+    
+    var playerLayer: AVPlayerLayer?
+    var player: AVPlayer?
+    
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let aiv = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
+        aiv.translatesAutoresizingMaskIntoConstraints = false
+        aiv.hidesWhenStopped = true
+        return aiv
+    }()
+    
+    lazy var playButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "play_icon"), for: .normal)
+        button.tintColor = .white
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handlePlay), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func handlePlay() {
+        if let videoUrlString = message?.videoUrl, let videoUrl = URL(string: videoUrlString) {
+            player = AVPlayer(url: videoUrl)
+            playerLayer = AVPlayerLayer(player: player)
+            playerLayer?.frame = bubbleView.bounds
+            bubbleView.layer.addSublayer(playerLayer!)
+            player?.play()
+            activityIndicatorView.startAnimating()
+            playButton.isHidden = true
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        playerLayer?.removeFromSuperlayer()
+        player?.pause()
+        activityIndicatorView.stopAnimating()
+    }
     
     let bubbleView: UIView = {
         let view = UIView()
@@ -55,6 +95,10 @@ class ChatMessageCell: UICollectionViewCell {
     }()
 
     @objc func handleZoomTap(tapGuesture: UITapGestureRecognizer) {
+        if message?.videoUrl != nil {
+            return
+        }
+        
         if let imageView = tapGuesture.view as? UIImageView {
             self.chatLogController?.performZoomInForImageView(startingImageView: imageView)
         }
@@ -70,12 +114,31 @@ class ChatMessageCell: UICollectionViewCell {
         self.addSubview(textView)
         self.addSubview(profileImageView)
         
+        // auto layout for image message
         bubbleView.addSubview(messageImageView)
         NSLayoutConstraint.activate([
             messageImageView.topAnchor.constraint(equalTo: bubbleView.topAnchor),
             messageImageView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor),
             messageImageView.widthAnchor.constraint(equalTo: bubbleView.widthAnchor),
             messageImageView.heightAnchor.constraint(equalTo: bubbleView.heightAnchor)
+        ])
+        
+        // auto layout fo button play video button
+        bubbleView.addSubview(playButton)
+        NSLayoutConstraint.activate([
+            playButton.centerXAnchor.constraint(equalTo: bubbleView.centerXAnchor),
+            playButton.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor),
+            playButton.heightAnchor.constraint(equalToConstant: 50),
+            playButton.widthAnchor.constraint(equalToConstant: 50)
+        ])
+        
+        // auto layout fo button play video button
+        bubbleView.addSubview(activityIndicatorView)
+        NSLayoutConstraint.activate([
+            activityIndicatorView.centerXAnchor.constraint(equalTo: bubbleView.centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: bubbleView.centerYAnchor),
+            activityIndicatorView.heightAnchor.constraint(equalToConstant: 50),
+            activityIndicatorView.widthAnchor.constraint(equalToConstant: 50)
         ])
         
         bubbleViewRightAuchor = bubbleView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8)

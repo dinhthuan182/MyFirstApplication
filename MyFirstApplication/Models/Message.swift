@@ -20,17 +20,21 @@ class Message: NSObject {
     @objc var imageHeight: NSNumber?
     @objc var imageWidth: NSNumber?
     
+    @objc var videoUrl: String?
+    
     //override init function
     init(dictionary: [String: AnyObject]) {
         super.init()
-        content = dictionary["content"] as? String
-        fromUid = dictionary["fromUid"] as? String
-        timestamp = dictionary["timestamp"] as? NSNumber
-        toUid = dictionary["toUid"] as? String
+        content = dictionary[CONTENT] as? String
+        fromUid = dictionary[FROMUID] as? String
+        timestamp = dictionary[TIMESTAMP] as? NSNumber
+        toUid = dictionary[TOUID] as? String
         
-        imageUrl = dictionary["imageUrl"] as? String
-        imageHeight = dictionary["imageHeight"] as? NSNumber
-        imageWidth = dictionary["imageWidth"] as? NSNumber
+        imageUrl = dictionary[IMAGEURL] as? String
+        imageHeight = dictionary[IMAGEHEIGHT] as? NSNumber
+        imageWidth = dictionary[IMAGEWIDTH] as? NSNumber
+        
+        videoUrl = dictionary[VIDEOURL] as? String
     }
     
     func chatPartnerId() -> String? {

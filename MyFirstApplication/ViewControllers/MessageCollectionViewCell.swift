@@ -65,7 +65,6 @@ class MessageCollectionViewCell: UICollectionViewCell {
     
     private func setupNameAndAvatar() {
         
-        
         if let uid = message?.chatPartnerId() {
             Ref().databaseSpecificUser(uid: uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let dictionary = snapshot.value as? [String: AnyObject] {
