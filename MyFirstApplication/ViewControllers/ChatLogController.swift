@@ -40,7 +40,7 @@ class ChatLogController: UICollectionViewController, UITextFieldDelegate, UIColl
             return
         }
         
-        let userMessagesRef = Ref().databaseSpecificUserMessages(uid: currentUid)
+        let userMessagesRef = Ref().databaseSpecificUserMessages(uid: currentUid).child(user!.uid!)
         userMessagesRef.observe(.childAdded, with: { (snapshot) in
             let messageUid = snapshot.key
             

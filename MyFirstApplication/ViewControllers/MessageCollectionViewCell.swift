@@ -9,7 +9,24 @@
 import UIKit
 import FirebaseAuth
 
-class MessageCollectionViewCell: UICollectionViewCell {
+class MessageCollectionViewCell: UICollectionViewCell, UIGestureRecognizerDelegate {
+    
+    var pan: UIPanGestureRecognizer!
+    
+    let rightSwipeView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let leftSwipeView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .red
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -77,6 +94,7 @@ class MessageCollectionViewCell: UICollectionViewCell {
             }, withCancel: nil)
         }
     }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -88,6 +106,7 @@ class MessageCollectionViewCell: UICollectionViewCell {
         backgroundColor = .cyan
         self.setupImageView()
         self.setupContainerView()
+        self.setupSwipeView()
     }
 }
 
@@ -158,5 +177,50 @@ extension MessageCollectionViewCell {
             hasReadImageView.widthAnchor.constraint(equalToConstant: 16),
             hasReadImageView.heightAnchor.constraint(equalToConstant: 16)
         ])
+    }
+    
+    func setupSwipeView()  {
+        self.insertSubview(rightSwipeView, belowSubview: self.contentView)
+        self.insertSubview(leftSwipeView, belowSubview: self.contentView)
+        pan = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
+        pan.delegate = self
+        self.addGestureRecognizer(pan)
+        
+    }
+    
+    override func layoutSubviews() {
+        let p: CGPoint = pan.translation(in: self)
+        let width = self.contentView.frame.width
+        let height = self.contentView.frame.height
+        self.contentView.frame = CGRect(x: p.x,y: 0, width: width, height: height);
+        self.leftSwipeView.frame = CGRect(x: p.x - leftSwipeView.frame.size.width - 10, y: 0, width: width, height: height)
+        self.rightSwipeView.frame = CGRect(x: p.x + width, y: 0, width: width, height: height)
+    }
+    
+    @objc func onPan(_ pan: UIPanGestureRecognizer) {
+        if pan.state == UIGestureRecognizer.State.began {
+
+        } else if pan.state == UIGestureRecognizer.State.changed {
+            self.setNeedsLayout()
+        } else {
+            if abs(pan.velocity(in: self).x) > 500 {
+                let collectionView: UICollectionView = self.superview as! UICollectionView
+                let indexPath: IndexPath = collectionView.indexPathForItem(at: self.center)!
+                collectionView.delegate?.collectionView!(collectionView, performAction: #selector(onPan(_:)), forItemAt: indexPath, withSender: nil)
+            } else {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.setNeedsLayout()
+                    self.layoutIfNeeded()
+                })
+            }
+        }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive press: UIPress) -> Bool {
+        return true
+    }
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return abs((pan.velocity(in: pan.view)).x) > abs((pan.velocity(in: pan.view)).y)
     }
 }
