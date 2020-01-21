@@ -42,11 +42,11 @@ class ChatApi {
                 return
             }
             onSucess()
-            let userMessagesRef = Ref().databaseSpecificUserMessages(uid: fromUid)
+            let userMessagesRef = Ref().databaseSpecificUserMessages(uid: fromUid).child(toUid)
             let messageId = chatRef.key!
             userMessagesRef.updateChildValues([messageId: 1])
             
-            let recipientUserMessagesRef = Ref().databaseSpecificUserMessages(uid: toUid)
+            let recipientUserMessagesRef = Ref().databaseSpecificUserMessages(uid: toUid).child(fromUid)
             recipientUserMessagesRef.updateChildValues([messageId: 1])
         }
     }
